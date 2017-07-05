@@ -12,13 +12,14 @@
     "typeRoots": [
       "node_modules"
     ],
-    "types": ["system"],
+    "types": ["SystemJS", "System"],
     "lib": [
       "es2016",
       "dom"
     ],
     "plugins": [
       { "name": "tslint-language-service"}
-    ]
+    ],
+    "module": "system"
   }
 }

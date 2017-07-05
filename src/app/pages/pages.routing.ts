@@ -1,10 +1,9 @@
 import { Routes, RouterModule } from '@angular/router';
 import { Pages } from './pages.component';
 import { ModuleWithProviders } from '@angular/core';
+// noinspection TypeScriptValidateTypes
 
-// // noinspection TypeScriptValidateTypes
-// declare var System: any;
-// export function loadChildren(path) { return System.import(path).then(function() {}); }
+// export function loadChildren(path) { return System.import(path); }
 
 export const routes: Routes = [
   {
@@ -12,9 +11,8 @@ export const routes: Routes = [
     component: Pages,
     children: [
       { path: '', redirectTo: 'ui', pathMatch: 'full' },
-      //  { path: 'new', loadChildren: () => System.import('./new/new.module') },
-      { path: 'ui', loadChildren: './ui/ui.module#UiModule' },
-
+    //  { path: 'new', loadChildren: () => loadChildren('./new/new.module') },
+      { path: 'converter', loadChildren: './converter/converter.module#ConverterModule' },
     ],
   },
 ];

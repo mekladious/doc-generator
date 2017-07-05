@@ -4,7 +4,7 @@ import {FormsModule} from '@angular/forms';
 import {NewComponent} from './new.component.js';
 import {routing} from './new.routing.js';
 
-class NewModule {}
+export default class NewModule {}
 NewModule.annotations = [new NgModule({
     imports: [
         CommonModule,
