@@ -4,7 +4,6 @@ var Partner = mongoose.model('Partner');
 var Auditor = mongoose.model('Auditor');
 var Manager = mongoose.model('Manager');
 
-var zipFolder = require('zip-folder');
 var mkdirp = require('mkdirp');
 
 var JSZip = require('jszip');
