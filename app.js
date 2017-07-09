@@ -21,7 +21,7 @@ var app = express();
 //Routes
 var routes = require('./routes');
 
-var port = process.env.port || 8080;
+var port = process.env.PORT || 8080;
 
 app.use(cors());
 
