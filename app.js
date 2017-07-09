@@ -20,7 +20,7 @@ var app = express();
 //Routes
 var routes = require('./routes');
 
-var port = 3000;
+var port = process.env.port || 8080;
 
 app.use(cors());
 
