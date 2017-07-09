@@ -3,16 +3,17 @@ path = require('path'),
 cors = require('cors'),
 bodyParser = require('body-parser'),
 mongoose = require('mongoose');
+config = require('./config/database');
 
 require('./models/company')
 require('./models/partner')
 require('./models/auditor')
 require('./models/manager')
 
-mongoose.connect('mongodb://localhost:27017/db');
+mongoose.connect(config.database);
 
 mongoose.connection.on('connected', () => {
-    console.log('Connected to database '+'mongodb://localhost:27017/companies');
+    console.log('Connected to database '+ config.database);
 });
 
 var app = express();
@@ -42,10 +43,6 @@ app.use('/user', routes);
 app.get('/', (req, res)=>{
     res.send('Invalid!');
 });
-
-// app.get('*', (req, res)=>{
-//     res.sendFile(path.join(__dirname, 'public/index.html'));
-// })
 
 //Start Server
 app.listen(port, ()=>{
