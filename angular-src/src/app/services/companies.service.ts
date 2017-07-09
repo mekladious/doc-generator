@@ -10,7 +10,7 @@ export class CompaniesService {
     const headers = new Headers();
     headers.append('Content-Type','application/json');
 
-    return this.http.get('http://localhost:3000/user/getCompanies', {headers: headers})
+    return this.http.get('user/getCompanies', {headers: headers})
       .map(res => res.json())
   }
 

@@ -11,7 +11,7 @@ export class ConvertService {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
 
-    return this.http.post('http://localhost:3000/user/convert', {headers: headers})
+    return this.http.post('user/convert', {headers: headers})
       .map(res => res.json())
   }
 

@@ -12,7 +12,7 @@ export class ConvertService {
     headers.append('Content-Type', 'application/json');
 
     const options = new RequestOptions({ responseType: ResponseContentType.Blob });
-    return this.http.post('http://localhost:3000/user/convert', file, options)
+    return this.http.post('user/convert', file, options)
         .map(res => res.blob());
 
   }
@@ -21,7 +21,7 @@ export class ConvertService {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
-    return this.http.get('http://localhost:3000/user/download', { headers })
+    return this.http.get('user/download', { headers })
       .map(res => res.json());
       
   }
