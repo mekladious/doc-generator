@@ -40,7 +40,7 @@ app.use('/user', routes);
 });
 
 app.get('/', (req, res)=>{
-    res.send('Invalid!xx');
+    res.send('Invalid!x');
 });
 
 app.get('*', (req, res)=>{
