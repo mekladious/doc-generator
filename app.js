@@ -44,7 +44,7 @@ app.get('/', (req, res)=>{
 });
 
 app.get('*', (req, res)=>{
-    res.sendFile(path.join(__dirname, 'angular-src/src/index.html'));
+    res.sendFile(path.join(__dirname, 'angular-src/dist/index.html'));
 })
 //Start Server
 app.listen(port, ()=>{
