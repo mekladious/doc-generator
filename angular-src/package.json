@@ -37,7 +37,7 @@
     "clean:coverage": "npm run rimraf -- coverage",
     "docs:deploy": "wintersmith build -C docs && gh-pages -d docs/build",
     "docs:serve": "wintersmith preview -C docs",
-  "postinstall": "ng build --aot -prod"
+    "postinstall": "ng build --aot -prod"
   },
   "private": true,
   "dependencies": {
