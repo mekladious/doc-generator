@@ -27,6 +27,7 @@ app.use(cors());
 
 //Static folder
 app.use(express.static(path.join(__dirname + 'public')));
+console.log(path.join(__dirname + '/angular-src'));
 app.use(express.static(path.join(__dirname + '/angular-src')));
 
 //BodyParser
@@ -47,7 +48,7 @@ app.get('/', (req, res)=>{
 
 app.get('*', (req, res)=>{
     console.log("x");
-    res.sendFile(path.join(__dirname+ 'angular-src/dist/index.html'));
+    res.sendFile(path.join(__dirname+ '/angular-src/dist/index.html'));
 })
 
 //Start Server
