@@ -41,10 +41,12 @@ app.use('/user', routes);
 
 app.get('/', (req, res)=>{
     res.send('Invalid!');
+    console.log()
 });
 
 app.get('*', (req, res)=>{
-    res.sendFile(path.join(__dirname, '/angular-src/dist/index.html'));
+    console.log("x");
+    res.sendFile(path.join(__dirname, '/angular-src/src/index.html'));
 })
 //Start Server
 app.listen(port, ()=>{
