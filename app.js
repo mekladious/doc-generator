@@ -27,7 +27,7 @@ app.use(cors());
 
 //Static folder
 app.use(express.static(path.join(__dirname + 'public')));
-app.use(express.static(path.join(__dirname + '/angular-src/dist')));
+app.use(express.static(path.join(__dirname + '/angular-src')));
 
 //BodyParser
 app.use(bodyParser.json());
