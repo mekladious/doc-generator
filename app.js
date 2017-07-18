@@ -47,9 +47,12 @@ app.get('/', (req, res)=>{
 });
 
 app.get('*', (req, res)=>{
-    console.log("x");
-    res.sendFile(path.join(__dirname+ '/angular-src/dist/index.html'));
-})
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+    res.header("Access-Control-Allow-Credentials", "true");
+    res.header("Access-Control-Allow-Headers", "Authorization, Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+    next();
+});
 
 //Start Server
 app.listen(port, ()=>{
