@@ -15,7 +15,7 @@ exports.config = {
     }
   },
   directConnect: true,
-  baseUrl: 'http://localhost:4200/',
+  baseUrl: 'https://innoventures-doc-generator.herokuapp.com/',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
