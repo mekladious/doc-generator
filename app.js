@@ -26,6 +26,7 @@ var port = process.env.PORT || 8080;
 app.use(cors());
 
 //Static folder
+app.use(express.static(__dirname + '/dist'));
 app.use(express.static(path.join(__dirname + 'public')));
 console.log(path.join(__dirname + '/angular-src'));
 app.use(express.static(path.join(__dirname + '/angular-src')));
