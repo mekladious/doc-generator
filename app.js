@@ -26,10 +26,7 @@ var port = process.env.PORT || 8080;
 app.use(cors());
 
 //Static folder
-app.use(express.static(__dirname + '/dist'));
-app.use(express.static(path.join(__dirname + 'public')));
-console.log(path.join(__dirname + '/angular-src'));
-app.use(express.static(path.join(__dirname + '/angular-src')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 //BodyParser
 app.use(bodyParser.json());
@@ -48,11 +45,7 @@ app.get('/', (req, res)=>{
 });
 
 app.get('*', (req, res)=>{
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-    res.header("Access-Control-Allow-Credentials", "true");
-    res.header("Access-Control-Allow-Headers", "Authorization, Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
-    next();
+  res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
 //Start Server
