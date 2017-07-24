@@ -35,13 +35,8 @@ app.use('/user', routes);
 
 //Index Route
 
- app.get('/download', function(req, res) { 
-    res.download('./template.docx') 
-});
-
 app.get('/', (req, res)=>{
     res.send('Invalid!');
-    console.log()
 });
 
 app.get('*', (req, res)=>{
