@@ -8,7 +8,10 @@ var companySchema = new Schema({
     },
     description: String,
     address: String,
-    register: Number
+    register: {
+        type:Number,
+        unique: true
+    },
 }, { collection: 'companies' });
 
 var Company = module.exports = mongoose.model('Company', companySchema);

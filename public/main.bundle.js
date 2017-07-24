@@ -1,4 +1,4 @@
-webpackJsonp([1],{
+webpackJsonp([2],{
 
 /***/ 142:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -488,6 +488,10 @@ var map = {
 	"./converter/converter.module": [
 		623,
 		0
+	],
+	"./registercompany/registercompany.module": [
+		624,
+		1
 	]
 };
 function webpackAsyncContext(req) {
@@ -520,7 +524,7 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dyna
 
 /***/ }),
 
-/***/ 394:
+/***/ 392:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -546,6 +550,12 @@ var CompaniesService = (function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]();
         headers.append('Content-Type', 'application/json');
         return this.http.get('user/getCompanies', { headers: headers })
+            .map(function (res) { return res.json(); });
+    };
+    CompaniesService.prototype.addCompany = function (body) {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]();
+        headers.append('Content-Type', 'application/json');
+        return this.http.post('user/addCompany', { body: body }, { headers: headers })
             .map(function (res) { return res.json(); });
     };
     return CompaniesService;
@@ -752,7 +762,7 @@ var _a, _b, _c, _d, _e;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__theme_nga_module__ = __webpack_require__(220);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_pages_module__ = __webpack_require__(431);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__services_convert_service__ = __webpack_require__(395);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__services_companies_service__ = __webpack_require__(394);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__services_companies_service__ = __webpack_require__(392);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -835,8 +845,8 @@ var _a;
 
 var routes = [
     { path: '', redirectTo: 'pages/converter', pathMatch: 'full' },
-    { path: '**', redirectTo: 'pages/converter' },
     { path: 'converter', redirectTo: 'pages/converter' },
+    { path: 'registercompany', redirectTo: 'pages/registercompany' },
 ];
 var routing = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* RouterModule */].forRoot(routes, { useHash: true });
 //# sourceMappingURL=app.routing.js.map
@@ -913,13 +923,26 @@ var PAGES_MENU = [
                 data: {
                     menu: {
                         title: 'Converter Page',
-                        icon: 'ion-android-home',
+                        icon: 'ion-code-download',
                         pathMatch: 'prefix',
                         selected: false,
                         expanded: false,
                         order: 0,
                     },
                 },
+            },
+            {
+                path: 'registercompany',
+                data: {
+                    menu: {
+                        title: 'Register Company',
+                        icon: 'ion-plus',
+                        pathMatch: 'prefix',
+                        selected: false,
+                        expanded: false,
+                        order: 0
+                    }
+                }
             },
         ],
     },
@@ -987,6 +1010,7 @@ var routes = [
             { path: '', redirectTo: 'ui', pathMatch: 'full' },
             //  { path: 'new', loadChildren: () => loadChildren('./new/new.module') },
             { path: 'converter', loadChildren: './converter/converter.module#ConverterModule' },
+            { path: 'registercompany', loadChildren: './registercompany/registercompany.module#RegisterCompanyModule' },
         ],
     },
 ];
@@ -4048,7 +4072,7 @@ module.exports = "<div class=\"{{baMultiCheckboxClass}} container-content\">\n  
 /***/ 602:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"page-top clearfix\" baScrollPosition maxHeight=\"50\" (scrollChange)=\"scrolledChanged($event)\"\n     [ngClass]=\"{scrolled: isScrolled}\">\n  <!--<a routerLink=\"/pages/dashboard\" class=\"al-logo clearfix\"><span>ng2-</span>admin</a>-->\n  <a href (click)=\"toggleMenu()\" class=\"collapse-menu-link ion-navicon\"></a>\n\n  <div class=\"search\">\n    <!--<i class=\"ion-ios-search-strong\" ng-click=\"startSearch()\"></i> -->\n    <!--<input id=\"searchInput\" type=\"text\" placeholder=\"Search for...\">-->\n  </div>\n\n  <div class=\"user-profile clearfix\">\n    <div class=\"dropdown al-user-profile\">\n      <a class=\"profile-toggle-link dropdown-toggle\" id=\"user-profile-dd\" data-toggle=\"dropdown\" aria-expanded=\"false\">\n        <!--<img src=\"{{ ( 'Nasta' | baProfilePicture ) }}\">-->\n      </a>\n      <ul class=\"dropdown-menu top-dropdown-menu profile-dropdown\" aria-labelledby=\"user-profile-dd\">\n        <!--<li class=\"dropdown-item\"><a href><i class=\"fa fa-user\"></i>Profile</a></li>-->\n        <!--<li class=\"dropdown-item\"><a href><i class=\"fa fa-cog\"></i>Settings</a></li>-->\n        <!--<li class=\"dropdown-item\"><a href class=\"signout\"><i class=\"fa fa-power-off\"></i>Sign out</a></li>-->\n      </ul>\n    </div>\n    <ba-msg-center></ba-msg-center>\n  </div>\n</div>\n"
+module.exports = "<div class=\"page-top clearfix\" baScrollPosition maxHeight=\"50\" (scrollChange)=\"scrolledChanged($event)\"\n     [ngClass]=\"{scrolled: isScrolled}\">\n  <a href (click)=\"toggleMenu()\" class=\"collapse-menu-link ion-navicon\"></a>\n</div>\n"
 
 /***/ }),
 

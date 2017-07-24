@@ -222,6 +222,88 @@ module.exports.getPartners = function(req, res){
 
 };
 
+module.exports.addNewCompany = [
+    function(req, res, next){
+        req.body= req.body.body;
+        Company.findOne({name: req.body.newCompany.name}, function(err, company) {
+            if (err) {
+                return res.json({
+                    error: {
+                        msg: err.message
+                    }
+                });
+            }
+            if(company){
+                console.log(company)
+                return res.json({
+                    error: {
+                        msg: "A company with the same name already exists"
+                    }
+                });
+            }else{
+                next();
+            }
+        })
+    },
+
+    function(req, res, next){
+        Company.create(req.body.newCompany, function(err, company) {
+            if (err) {
+                return res.json({
+                    error: {
+                        msg: err.message
+                    }
+                });
+            }
+            req.body.newAuditor.companyId = company._id;
+            req.body.newManager.companyId = company._id;
+            req.body.newPartner.companyId = company._id;
+            next();
+        })
+    },
+
+    function(req, res, next){
+        Manager.create(req.body.newManager, function(err) {
+            if (err) {
+                return res.json({
+                    error: {
+                        msg: err.message
+                    }
+                });
+            }
+            next();
+        })
+    },
+
+    function(req, res, next){
+        Partner.create(req.body.newPartner, function(err) {
+            if (err) {
+                return res.json({
+                    error: {
+                        msg: err.message
+                    }
+                });
+            }
+            next();
+        })
+    },
+
+    function(req, res){
+        Auditor.create(req.body.newAuditor, function(err) {
+            if (err) {
+                return res.json({
+                    error: {
+                        msg: err.message
+                    }
+                });
+            }
+            return res.json({
+                msg: 'Company has been added successfully'
+            });
+        })
+    }
+];
+
 module.exports.addCompany = function(req, res){
     Company.create(req.body.newCompany, function(err) {
         if (err) {
@@ -235,7 +317,7 @@ module.exports.addCompany = function(req, res){
             msg: 'Company has been added successfully'
         });
     })
-}
+};
 
 module.exports.addPartner = function(req, res){
     Partner.create(req.body.newPartner, function(err) {
@@ -250,7 +332,7 @@ module.exports.addPartner = function(req, res){
             msg: 'Partner has been added successfully'
         });
     })
-}
+};
 
 module.exports.addAuditor = function(req, res){
     Auditor.create(req.body.newAuditor, function(err) {

@@ -13,5 +13,12 @@ export class CompaniesService {
     return this.http.get('user/getCompanies', {headers: headers})
       .map(res => res.json())
   }
+  addCompany(body) {
+    const headers = new Headers();
+    headers.append('Content-Type','application/json');
+
+    return this.http.post('user/addCompany', {body:body},{headers: headers})
+      .map(res => res.json())
+  }
 
 }

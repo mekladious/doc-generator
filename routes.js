@@ -11,7 +11,7 @@ router.get('/getAuditors', controller.getAuditors);
 
 router.get('/getPartners', controller.getPartners);
 
-router.post('/addCompany', controller.addCompany);
+router.post('/addCompany', controller.addNewCompany);
 
 router.post('/addManager', controller.addManager);
 
