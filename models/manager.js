@@ -9,7 +9,7 @@ var managerSchema = new Schema({
     name: String,
     title: String,
     email: String
-});
+}, { collection: 'managers' });
 
 var Manager = mongoose.model('Manager', managerSchema);
 module.exports = Manager;

@@ -9,7 +9,7 @@ var auditorSchema = new Schema({
     name: String,
     title: String,
     email: String
-});
+}, { collection: 'auditors' });
 
 var Auditor = mongoose.model('Auditor', auditorSchema);
 module.exports = Auditor;

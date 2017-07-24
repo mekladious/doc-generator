@@ -29,7 +29,6 @@ module.exports.convert = [
         });
     },
 
-
     // Get partner for a specific company and pass them to the next function which generates the files
 
     function(req, res, next){
