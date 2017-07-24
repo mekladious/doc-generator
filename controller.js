@@ -90,8 +90,8 @@ module.exports.convert = [
 
     function(req, res, next){
 
-        if(fs.existsSync(__dirname + '/public/' + req.body.company.name + '.docx')){
-            fs.unlinkSync(__dirname + '/public/' + req.body.company.name + '.docx');
+        if(fs.existsSync(__dirname + '/files/' + req.body.company.name + '.docx')){
+            fs.unlinkSync(__dirname + '/files/' + req.body.company.name + '.docx');
         }
         // console.log(req.body);
         var file = req.body;
@@ -143,14 +143,14 @@ module.exports.convert = [
                         .generate({type: 'nodebuffer'});
 
             // buf is a nodejs buffer, you can either write it to a file or do anything else with it.
-            fs.writeFileSync(path.resolve(__dirname, 'public/'+req.body.company.name+".docx"), buf);
+            fs.writeFileSync(path.resolve(__dirname, 'files/'+req.body.company.name+".docx"), buf);
         
         next();
     },
 
     function(req, res){
         var company = req.body.company.name;
-        res.sendFile(__dirname + '/public/' + company + '.docx');
+        res.sendFile(__dirname + '/files/' + company + '.docx');
     }
 
 ];
