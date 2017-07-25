@@ -38,7 +38,6 @@ export class Converter {
     private companiesService: CompaniesService,
   ) {
     this.generate = true;
-    this.download = false;
 
     this.dir = '/Users/mekladious/ng2-admin/backend/template.docx';
 
@@ -48,6 +47,7 @@ export class Converter {
   }
   
   onGenerate() {
+    this.generate= false;
     this.date = new Date(this.input4);
     const days = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
     this.dayName = days[this.date.getDay()];
@@ -74,6 +74,7 @@ export class Converter {
         // this.flashMessage.show('error generating document', { cssClass: 'alert-danger', timeout: 3000});
         console.log('error generating document');
       }
+      this.generate=true;
     });
   }
 

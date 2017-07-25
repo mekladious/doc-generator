@@ -1331,7 +1331,6 @@ var Converter = (function () {
         this.convertService = convertService;
         this.companiesService = companiesService;
         this.generate = true;
-        this.download = false;
         this.dir = '/Users/mekladious/ng2-admin/backend/template.docx';
         this.companiesService.getCompanies().subscribe(function (data) {
             _this.companies = data.companies;
@@ -1339,6 +1338,7 @@ var Converter = (function () {
     }
     Converter.prototype.onGenerate = function () {
         var _this = this;
+        this.generate = false;
         this.date = new Date(this.input4);
         var days = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
         this.dayName = days[this.date.getDay()];
@@ -1365,6 +1365,7 @@ var Converter = (function () {
                 // this.flashMessage.show('error generating document', { cssClass: 'alert-danger', timeout: 3000});
                 console.log('error generating document');
             }
+            _this.generate = true;
         });
     };
     return Converter;
@@ -3269,7 +3270,7 @@ if (typeof module !== "undefined" && module.exports) {
 /* 663 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"widgets\">\n  <flash-messages></flash-messages>\n<script src=\"https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js\"></script>\n  <div class=\"typography-document-samples\"style=\"display: block;\">\n    <div class=\" typography-widget\">\n      <form *ngIf=\"generate\" (submit)=\"onGenerate() \">\n      <!--<form (submit)=\"onGenerate() \" >-->\n      <div title=\"DOCUMENT GENERATOR\" baCardClass=\"with-scroll heading-widget\">\n        \n          <div>\n            <h3>Choose data you want to display in the word file</h3>\n          </div>\n        <br>\n\n        <div class=\"form-group\">\n          <label for=\"sel1\">Company:</label>\n          <select class=\"form-control\" [(ngModel)]=\"company\" name=\"company\">\n            <option *ngFor=\"let company of companies\" value={{company._id}} required>{{company.name}}</option>\n          </select>\n        </div>\n         <br>\n\n        <div class=\"form-group\">\n          <label for=\"cal\">Date:</label> <br>\n          <input type=\"date\" [(ngModel)]=\"input4\" name=\"input4\" placeholder=\"Enter text\" class=\"form-control\" id=\"cal\" required>\n        </div>\n         <br>\n        <div>\n\n        </div>\n        <div style=\"text-align:center;\">\n          <input type=\"submit\" class=\"btn btn-success btn-raised center\" style=\"position: absolute; bottom:10px; margin: 0 auto;\" value=\"Generate file\" [disabled]=\"!input4 || !company\">\n        </div>\n      </div>\n      </form>\n      \n    </div>\n  </div>\n\n</div>\n"
+module.exports = "<div class=\"widgets\">\n  <flash-messages></flash-messages>\n<script src=\"https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js\"></script>\n  <div class=\"typography-document-samples\"style=\"display: block;\">\n    <div class=\" typography-widget\">\n      <form (submit)=\"onGenerate() \">\n      <!--<form (submit)=\"onGenerate() \" >-->\n      <div title=\"DOCUMENT GENERATOR\" baCardClass=\"with-scroll heading-widget\">\n        \n          <div>\n            <h3>Choose data you want to display in the word file</h3>\n          </div>\n        <br>\n\n        <div class=\"form-group\">\n          <label for=\"sel1\">Company:</label>\n          <select class=\"form-control\" [(ngModel)]=\"company\" name=\"company\">\n            <option *ngFor=\"let company of companies\" value={{company._id}} required>{{company.name}}</option>\n          </select>\n        </div>\n         <br>\n\n        <div class=\"form-group\">\n          <label for=\"cal\">Date:</label> <br>\n          <input type=\"date\" [(ngModel)]=\"input4\" name=\"input4\" placeholder=\"Enter text\" class=\"form-control\" id=\"cal\" required>\n        </div>\n         <br>\n        <div>\n\n        </div>\n        <div style=\"text-align:center;\">\n          <input type=\"submit\" class=\"btn btn-success btn-raised center\" style=\"position: absolute; bottom:10px; margin: 0 auto;\" value=\"Generate file\" [disabled]=\"!input4 || !company || !generate\">\n        </div>\n      </div>\n      </form>\n      \n    </div>\n  </div>\n\n</div>\n"
 
 /***/ }),
 /* 664 */,
