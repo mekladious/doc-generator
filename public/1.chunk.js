@@ -9,9 +9,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__registercompany_component__ = __webpack_require__(642);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__registercompany_routing__ = __webpack_require__(661);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angular2_flash_messages__ = __webpack_require__(627);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__registercompany_component__ = __webpack_require__(643);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__registercompany_routing__ = __webpack_require__(663);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angular2_flash_messages__ = __webpack_require__(628);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angular2_flash_messages___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_angular2_flash_messages__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -48,7 +48,7 @@ RegisterCompanyModule = __decorate([
 
 /***/ }),
 
-/***/ 626:
+/***/ 627:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -70,7 +70,7 @@ exports.FlashMessagesService = FlashMessagesService;
 
 /***/ }),
 
-/***/ 627:
+/***/ 628:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -79,12 +79,12 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(636));
+__export(__webpack_require__(637));
 //# sourceMappingURL=index.js.map
 
 /***/ }),
 
-/***/ 634:
+/***/ 635:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -106,15 +106,15 @@ exports.FlashMessage = FlashMessage;
 
 /***/ }),
 
-/***/ 635:
+/***/ 636:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
-var flash_message_1 = __webpack_require__(634);
-var flash_messages_service_1 = __webpack_require__(626);
+var flash_message_1 = __webpack_require__(635);
+var flash_messages_service_1 = __webpack_require__(627);
 var FlashMessagesComponent = (function () {
     function FlashMessagesComponent(_flashMessagesService, _cdRef) {
         this._flashMessagesService = _flashMessagesService;
@@ -173,21 +173,21 @@ exports.FlashMessagesComponent = FlashMessagesComponent;
 
 /***/ }),
 
-/***/ 636:
+/***/ 637:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var module_1 = __webpack_require__(637);
+var module_1 = __webpack_require__(638);
 exports.FlashMessagesModule = module_1.FlashMessagesModule;
-var flash_messages_service_1 = __webpack_require__(626);
+var flash_messages_service_1 = __webpack_require__(627);
 exports.FlashMessagesService = flash_messages_service_1.FlashMessagesService;
 //# sourceMappingURL=index.js.map
 
 /***/ }),
 
-/***/ 637:
+/***/ 638:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -195,8 +195,8 @@ exports.FlashMessagesService = flash_messages_service_1.FlashMessagesService;
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
 var common_1 = __webpack_require__(7);
-var flash_messages_component_1 = __webpack_require__(635);
-var flash_messages_service_1 = __webpack_require__(626);
+var flash_messages_component_1 = __webpack_require__(636);
+var flash_messages_service_1 = __webpack_require__(627);
 var FlashMessagesModule = (function () {
     function FlashMessagesModule() {
     }
@@ -217,7 +217,7 @@ exports.FlashMessagesModule = FlashMessagesModule;
 
 /***/ }),
 
-/***/ 642:
+/***/ 643:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -226,7 +226,7 @@ exports.FlashMessagesModule = FlashMessagesModule;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_companies_service__ = __webpack_require__(392);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular2_flash_messages__ = __webpack_require__(627);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular2_flash_messages__ = __webpack_require__(628);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular2_flash_messages___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_angular2_flash_messages__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -288,7 +288,7 @@ var RegisterCompanyComponent = (function () {
 RegisterCompanyComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'registercompany',
-        template: __webpack_require__(664),
+        template: __webpack_require__(667),
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__services_companies_service__["a" /* CompaniesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_companies_service__["a" /* CompaniesService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4_angular2_flash_messages__["FlashMessagesService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_angular2_flash_messages__["FlashMessagesService"]) === "function" && _d || Object])
 ], RegisterCompanyComponent);
@@ -298,13 +298,13 @@ var _a, _b, _c, _d;
 
 /***/ }),
 
-/***/ 661:
+/***/ 663:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return routing; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_router__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__registercompany_component__ = __webpack_require__(642);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__registercompany_component__ = __webpack_require__(643);
 
 
 var routes = [
@@ -318,7 +318,7 @@ var routing = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* RouterModule 
 
 /***/ }),
 
-/***/ 664:
+/***/ 667:
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"widgets\">\n\n        <flash-messages></flash-messages>\n\n<script src=\"https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js\"></script>\n  \n  <div class=\"typography-document-samples\"style=\"display: block;\">\n    <div class=\" typography-widget\">\n      <!-- <form *ngIf=\"generate\" (submit)=\"onGenerate() \"> -->\n      <form (submit)=\"onSubmit() \" >\n      <div title=\"Register new company\" baCardClass=\"with-scroll heading-widget\">\n        \n        <div>\n            <h5>Company details</h5>\n        </div> \n        <br>\n\n        <div class=\"form-group\">\n          <input type=\"text\" [(ngModel)]=\"companyname\" name=\"companyname\" placeholder=\"Company Name\" class=\"form-control\" id=\"companyname\" required>\n        </div>\n         <br>\n\n         <div class=\"form-group\">\n          <input type=\"text\" [(ngModel)]=\"companyaddress\" name=\"companyaddress\" placeholder=\"Company Address\" class=\"form-control\" id=\"companyaddress\" required>\n        </div>\n        <br>\n\n        <div class=\"form-group\">\n          <input type=\"text\" [(ngModel)]=\"registernum\" name=\"registernum\" placeholder=\"Company Register No.\" class=\"form-control\" id=\"registernum\" required>\n        </div>\n        \n        <hr>\n\n        <div>\n            <h5>Manager details</h5>\n        </div> \n        <br>\n\n        <div class=\"form-group\">\n          <input type=\"text\" [(ngModel)]=\"managername\" name=\"managername\" placeholder=\"Manager Name\" class=\"form-control\" id=\"managername\" required>\n        </div>\n\n        <hr>\n\n        <div>\n            <h5>Partner details</h5>\n        </div> \n        <br>\n\n        <div class=\"form-group\">\n          <input type=\"text\" [(ngModel)]=\"partnername\" name=\"partnername\" placeholder=\"Partner Name\" class=\"form-control\" id=\"partnername\" required>\n        </div>\n\n        <hr>\n\n        <div>\n            <h5>Auditor details</h5>\n        </div> \n        <br>\n\n        <div class=\"form-group\">\n          <input type=\"text\" [(ngModel)]=\"auditorname\" name=\"auditorname\" placeholder=\"Auditor Name\" class=\"form-control\" id=\"auditorname\" required>\n        </div>\n         <br>\n         \n\n        <div style=\"text-align:center;\">\n          <input type=\"submit\" class=\"btn btn-success btn-raised center\" style=\"position: absolute; bottom:10px; margin: 0 auto;\" value=\"Submit\" [disabled] = \"!companyname || !companyaddress || !registernum || !partnername || !managername || !auditorname\">\n        </div>\n\n      </div>\n      </form>\n      \n    </div>\n  </div>\n\n</div>\n"
