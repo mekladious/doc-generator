@@ -1,4 +1,4 @@
-webpackJsonp([3],{
+webpackJsonp([2],{
 
 /***/ 142:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -492,10 +492,6 @@ var map = {
 	"./registercompany/registercompany.module": [
 		624,
 		1
-	],
-	"./wuzzuf/wuzzuf.module": [
-		625,
-		2
 	]
 };
 function webpackAsyncContext(req) {
@@ -947,20 +943,7 @@ var PAGES_MENU = [
                         order: 0
                     }
                 }
-            },
-            {
-                path: 'wuzzuf',
-                data: {
-                    menu: {
-                        title: 'wuzzuf Page',
-                        icon: 'ion-android-home',
-                        pathMatch: 'prefix',
-                        selected: false,
-                        expanded: false,
-                        order: 0
-                    }
-                }
-            },
+            }
         ],
     },
 ];
@@ -1027,8 +1010,7 @@ var routes = [
             { path: '', redirectTo: 'ui', pathMatch: 'full' },
             //  { path: 'new', loadChildren: () => loadChildren('./new/new.module') },
             { path: 'converter', loadChildren: './converter/converter.module#ConverterModule' },
-            { path: 'registercompany', loadChildren: './registercompany/registercompany.module#RegisterCompanyModule' },
-            { path: 'wuzzuf', loadChildren: './wuzzuf/wuzzuf.module#WuzzufModule' }
+            { path: 'registercompany', loadChildren: './registercompany/registercompany.module#RegisterCompanyModule' }
         ],
     },
 ];

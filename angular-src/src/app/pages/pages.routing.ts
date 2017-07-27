@@ -13,8 +13,7 @@ export const routes: Routes = [
       { path: '', redirectTo: 'ui', pathMatch: 'full' },
     //  { path: 'new', loadChildren: () => loadChildren('./new/new.module') },
       { path: 'converter', loadChildren: './converter/converter.module#ConverterModule' },
-      { path: 'registercompany', loadChildren: './registercompany/registercompany.module#RegisterCompanyModule' }, 
-      { path: 'wuzzuf',  loadChildren: './wuzzuf/wuzzuf.module#WuzzufModule' }
+      { path: 'registercompany', loadChildren: './registercompany/registercompany.module#RegisterCompanyModule' }
     ],
   },
 ];

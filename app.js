@@ -3,7 +3,20 @@ path = require('path'),
 cors = require('cors'),
 bodyParser = require('body-parser'),
 mongoose = require('mongoose');
-config = require('./config/database');
+config = require('./config/database'),
+fileUpload = require('express-fileupload'),
+multer  =   require('multer');;
+
+//Multer Configs
+var storage =   multer.diskStorage({
+  destination: function (req, file, callback) {
+    callback(null, './uploads');
+  },
+  filename: function (req, file, callback) {
+    callback(null, file.fieldname + '-' + Date.now());
+  }
+});
+var upload = multer({ storage : storage}).single('applications');
 
 require('./models/company')
 require('./models/partner')
@@ -24,6 +37,8 @@ var routes = require('./routes');
 var port = process.env.PORT || 8080;
 
 app.use(cors());
+
+app.use(fileUpload());
 
 //Static folder
 app.use(express.static(path.join(__dirname, 'public')));
