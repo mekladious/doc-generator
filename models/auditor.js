@@ -7,8 +7,7 @@ var auditorSchema = new Schema({
         ref: 'Company'
     },
     name: String,
-    title: String,
-    email: String
+    address: String
 }, { collection: 'auditors' });
 
 var Auditor = mongoose.model('Auditor', auditorSchema);

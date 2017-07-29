@@ -7,8 +7,7 @@ var managerSchema = new Schema({
         ref: 'Company'
     },
     name: String,
-    title: String,
-    email: String
+    address: String
 }, { collection: 'managers' });
 
 var Manager = mongoose.model('Manager', managerSchema);

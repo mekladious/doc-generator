@@ -7,8 +7,7 @@ var partnerSchema = new Schema({
         ref: 'Company'
     },
     name: String,
-    title: String,
-    email: String
+    address: String
 }, { collection: 'partners' });
 
 var Partner = mongoose.model('Partner', partnerSchema);
