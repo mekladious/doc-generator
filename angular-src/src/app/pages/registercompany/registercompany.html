@@ -1,3 +1,5 @@
+
+<html dir="rtl" lang="ar">
 <div class="widgets">
 
         <flash-messages></flash-messages>
@@ -11,57 +13,80 @@
       <div title="Register new company" baCardClass="with-scroll heading-widget">
         
         <div>
-            <h5>Company details</h5>
+            <h5>بيانات الشركة</h5>
         </div> 
         <br>
 
         <div class="form-group">
-          <input type="text" [(ngModel)]="companyname" name="companyname" placeholder="Company Name" class="form-control" id="companyname" required>
+          <input type="text" [(ngModel)]="companyname" name="companyname" placeholder="الاسم" class="form-control" id="companyname" required>
         </div>
          <br>
 
          <div class="form-group">
-          <input type="text" [(ngModel)]="companyaddress" name="companyaddress" placeholder="Company Address" class="form-control" id="companyaddress" required>
+          <input type="text" [(ngModel)]="companyaddress" name="companyaddress" placeholder="العنوان" class="form-control" id="companyaddress" required>
         </div>
         <br>
 
         <div class="form-group">
-          <input type="number" [(ngModel)]="registernum" name="registernum" placeholder="Company Register No." class="form-control" id="registernum" required>
+          <input type="number" [(ngModel)]="registernum" name="registernum" placeholder="رقم السجل" class="form-control" id="registernum" required>
         </div>
-        
+        <br>
+
+        <div class="form-group">
+          <label for="sel2" >نوع الشركة</label>
+          <select class="form-control" [(ngModel)]="type" name="type">
+            <option value=limited required>ذات مسئولية محدودة</option>
+            <option value=abnormal required>شركة مساهمة مصرية</option>
+          </select>
+        </div>
         <hr>
 
         <div>
-            <h5>Manager details</h5>
+            <h5> بيانات المدير</h5>
         </div> 
         <br>
 
         <div class="form-group">
-          <input type="text" [(ngModel)]="managername" name="managername" placeholder="Manager Name" class="form-control" id="managername" required>
+          <input type="text" [(ngModel)]="managername" name="managername" placeholder="الاسم" class="form-control" id="managername" required>
+        </div>
+        <br>
+
+        <div class="form-group">
+          <input type="text" [(ngModel)]="manageraddress" name="manageraddress" placeholder="العنوان" class="form-control" id="managername" required>
         </div>
 
         <hr>
 
         <div>
-            <h5>Partner details</h5>
+            <h5>بيانات الشركاء</h5>
         </div> 
         <br>
 
         <div class="form-group">
-          <input type="text" [(ngModel)]="partnername" name="partnername" placeholder="Partner Name" class="form-control" id="partnername" required>
+          <input type="text" [(ngModel)]="partnername" name="partnername" placeholder="الاسم" class="form-control" id="partnername" required>
+        </div>
+        <br>
+
+        <div class="form-group">
+          <input type="text" [(ngModel)]="partneraddress" name="partneraddress" placeholder="العنوان" class="form-control" id="partneraddress" required>
         </div>
 
         <hr>
 
         <div>
-            <h5>Auditor details</h5>
+            <h5>بيانات المحاسب</h5>
         </div> 
         <br>
 
         <div class="form-group">
-          <input type="text" [(ngModel)]="auditorname" name="auditorname" placeholder="Auditor Name" class="form-control" id="auditorname" required>
+          <input type="text" [(ngModel)]="auditorname" name="auditorname" placeholder="الاسم" class="form-control" id="auditorname" required>
         </div>
          <br>
+         <br>
+
+        <div class="form-group">
+          <input type="text" [(ngModel)]="auditoraddress" name="auditoraddress" placeholder="العنوان" class="form-control" id="auditoraddress" required>
+        </div>
          
 
         <div style="text-align:center;">
@@ -75,3 +100,4 @@
   </div>
 
 </div>
+</html>

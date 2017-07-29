@@ -14,8 +14,12 @@ export class RegisterCompanyComponent {
   companyaddress: string;
   registernum: Number;
   managername: string;
+  manageraddress: string;
   partnername: string;
+  partneraddress: string;
   auditorname: string;
+  auditoraddress: string;
+
 
   constructor(
     private http: Http,
@@ -33,15 +37,18 @@ export class RegisterCompanyComponent {
       };
 
     const newPartner = {
-      name: this.partnername
+      name: this.partnername,
+      address: this.partneraddress
     };
 
     const newAuditor = {
-      name: this.auditorname
+      name: this.auditorname, 
+      address: this.auditoraddress
     };
 
     const newManager = {
-      name: this.managername
+      name: this.managername,
+      address: this.manageraddress
     };
 
     const body = {
