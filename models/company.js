@@ -6,7 +6,7 @@ var companySchema = new Schema({
         type:String,
         unique: true
     },
-    description: String,
+    type: String,
     address: String,
     register: {
         type:Number,
