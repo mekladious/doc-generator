@@ -32,10 +32,10 @@ module.exports.convert = [
     // Get partner for a specific company and pass them to the next function which generates the files
 
     function(req, res, next){
-        Partner.findOne({companyId: req.body.companyId}, (err, partner) => {
+        Partner.find({companyId: req.body.companyId}, (err, partners) => {
             if(err) {throw err;}
-            if(partner){
-                req.body.partner = partner;
+            if(partners){
+                req.body.partners = partners;
                  next();
             }else{
                 console.log("partner");
@@ -95,54 +95,79 @@ module.exports.convert = [
         // console.log(req.body);
         var file = req.body;
         var auditor = file.auditor;
-        var partner = file.partner;
+        auditor.type = "مراقب حساباتl";
+        //var partners = file.partners;
         var manager = file.manager;
+        manager.type = "مدير";
         var date = req.body.day+"/"+req.body.month+"/"+req.body.year;
         var day = req.body.dayName;
+        var meetingtype = file.meetingtype;
 
+        var partners = [
+            {name:"mira", address:"123"},
+            {name:"medhat", address:"123"}
+        ];
 
-            //Load the docx file as a binary
-            var content = fs
-                .readFileSync(path.resolve(__dirname, 'files/template.docx'), 'binary');
+        var companytype = (req.body.company.type=="limited")? "ذات مسئولية محدودة":"شركة مساهمة مصرية";
+        var partnertype = (req.body.company.type=="limited")? "مالك حصص":"مالك أسهم";
+        var managertype = (req.body.company.type=="limited")? "مدير":"رئيس مجلس الإدارة / عضو مجلسس الإدارة";
+        //Load the docx file as a binary
+        var content = fs
+            .readFileSync(path.resolve(__dirname, 'files/template.docx'), 'binary');
 
-            var zip = new JSZip(content);
+        var zip = new JSZip(content);
 
-            var doc = new Docxtemplater();
-            doc.loadZip(zip);
+        var doc = new Docxtemplater();
+        doc.loadZip(zip);
 
-            //set the templateVariables
-            doc.setData({
-                company: file.company.name,
-                manager: manager.name,
-                partner: partner.name,
-                auditor: auditor.name,
-                date: date, 
-                day: day,
-                address: file.company.address,
-                register: file.company.register
-            });
-            // console.log('here')
-            try {
-                // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)
-                doc.render()
+        //set the templateVariables
+
+        var employees = [];
+        employees = employees.concat(partners);
+        employees.push(manager);
+        employees.push(auditor);
+
+        console.log(file);
+        console.log(employees);
+        console.log(partners);
+        console.log(meetingtype);
+
+        doc.setData({
+            employees: employees,
+            company: file.company.name,
+            manager: manager.name,
+            partners: partners,
+            auditor: auditor.name,
+            date: date, 
+            day: day,
+            address: file.company.address,
+            register: file.company.register,
+            meetingtype: meetingtype,
+            agenda:"jjmk",
+            companytype: companytype
+        });
+        // console.log('here')
+        try {
+            // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)
+            doc.render()
+        }
+        catch (error) {
+            var e = {
+                message: error.message,
+                name: error.name,
+                stack: error.stack,
+                properties: error.properties,
             }
-            catch (error) {
-                var e = {
-                    message: error.message,
-                    name: error.name,
-                    stack: error.stack,
-                    properties: error.properties,
-                }
-                // console.log(JSON.stringify({error: e}));
-                // The error thrown here contains additional information when logged with JSON.stringify (it contains a property object).
-                throw error;
-            }
+            // console.log(JSON.stringify({error: e}));
+            // The error thrown here contains additional information when logged with JSON.stringify (it contains a property object).
+            throw error;
+        }
 
-            var buf = doc.getZip()
-                        .generate({type: 'nodebuffer'});
+        var buf = doc.getZip()
+                    .generate({type: 'nodebuffer'});
 
-            // buf is a nodejs buffer, you can either write it to a file or do anything else with it.
-            fs.writeFileSync(path.resolve(__dirname, 'files/'+req.body.company.name+".docx"), buf);
+        // buf is a nodejs buffer, you can either write it to a file or do anything else with it.
+        fs.writeFileSync(path.resolve(__dirname, 'files/'+req.body.company.name+".docx"), buf);
         
         next();
     },
@@ -224,6 +249,9 @@ module.exports.getPartners = function(req, res){
 
 module.exports.addNewCompany = [
     function(req, res, next){
+
+        console.log(req.body.body.partners);
+        console.log(req.body);
         req.body= req.body.body;
         Company.findOne({name: req.body.newCompany.name}, function(err, company) {
             if (err) {
@@ -249,6 +277,8 @@ module.exports.addNewCompany = [
     function(req, res, next){
         Company.create(req.body.newCompany, function(err, company) {
             if (err) {
+
+        console.log(req.body.body.newCompany.partners);
                 return res.json({
                     error: {
                         msg: err.message
@@ -257,7 +287,8 @@ module.exports.addNewCompany = [
             }
             req.body.newAuditor.companyId = company._id;
             req.body.newManager.companyId = company._id;
-            req.body.newPartner.companyId = company._id;
+            req.body.companyId = company._id;
+            // req.body.newPartner.companyId = company._id;
             next();
         })
     },
@@ -276,16 +307,21 @@ module.exports.addNewCompany = [
     },
 
     function(req, res, next){
-        Partner.create(req.body.newPartner, function(err) {
-            if (err) {
-                return res.json({
-                    error: {
-                        msg: err.message
-                    }
-                });
-            }
-            next();
-        })
+        var partners = req.body.partners;
+        console.log("here");
+        for(i=0; i<req.body.partners.length; i++){
+            partners[i].companyId= req.body.companyId;
+            Partner.create(partners[i], function(err) {
+                if (err) {
+                    return res.json({
+                        error: {
+                            msg: err.message
+                        }
+                    });
+                }
+                next();
+            })
+        }
     },
 
     function(req, res){
