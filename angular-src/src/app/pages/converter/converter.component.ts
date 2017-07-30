@@ -29,6 +29,7 @@ export class Converter {
   generate: boolean;
   download: boolean;
   dir: String;
+  type: String;
 
   constructor (
     private http: Http,
@@ -37,6 +38,7 @@ export class Converter {
     private convertService: ConvertService,
     private companiesService: CompaniesService,
   ) {
+    
     this.generate = true;
 
     this.dir = '/Users/mekladious/ng2-admin/backend/template.docx';
@@ -54,6 +56,7 @@ export class Converter {
     this.day = this.date.getDate();
     this.month = this.date.getMonth();
     this.year = this.date.getFullYear();
+
     const file = {
       companyId : this.company,
       date : this.date,
@@ -61,6 +64,7 @@ export class Converter {
       month: this.month + 1,
       year: this.year,
       dayName: this.dayName,
+      meetingtype: this.type
     };
     // console.log(file);
     this.convertService.convert(file).subscribe(res => {
