@@ -59,19 +59,47 @@
 
         <div>
             <h5>بيانات الشركاء</h5>
+        <!-- <button type="button" (click)="partners.push({})">+</button> -->
         </div> 
         <br>
 
+
+        <table>
+          <tr *ngFor="let partner of partners" style="margin-bottom: 10px;">
+              <td>{{partner.name}}،</td> <td>{{partner.address}}</td> <td><button (click)="removePartner(partner)" class="btn btn-danger btn-xs">x</button></td>
+          </tr>
+        </table>
+        <br>
         <div class="form-group">
-          <input type="text" [(ngModel)]="partnername" name="partnername" placeholder="الاسم" class="form-control" id="partnername" required>
+        <input #name type="text" [(ngModel)]="partnername" name="partnername" placeholder="الاسم" class="form-control" required/>
         </div>
         <br>
-
         <div class="form-group">
-          <input type="text" [(ngModel)]="partneraddress" name="partneraddress" placeholder="العنوان" class="form-control" id="partneraddress" required>
+        <input #address type="text" [(ngModel)]="partneraddress" name="partneraddress" placeholder="العنوان" class="form-control" required/>
         </div>
+        <br>
+        <button type="button" class="btn btn-primary btn-xs" (click)="addPartner(name.value,address.value)" [disabled]="!partnername || !partneraddress">إضافة شريك</button>
+        <br>
+        <hr>  
 
-        <hr>
+
+        <!-- <div *ngFor="let partner of partners; let i=index">
+
+            <h5>الشريك رقم  {{i+1}}</h5>
+
+        <button type="button" (click)="partners.splice(i, 1)" >x</button>
+          <div class="form-group">
+            <input type="text" [(ngModel)]="partner.name" name="partnername" placeholder="الاسم" class="form-control" required>
+          </div>
+          <br>
+
+          <div class="form-group">
+            <input type="text" [(ngModel)]="partner.address" name="partneraddress" placeholder="العنوان" class="form-control" required>
+          </div>
+
+          <hr>
+        </div> -->
+        <br>
 
         <div>
             <h5>بيانات المحاسب</h5>
@@ -82,7 +110,6 @@
           <input type="text" [(ngModel)]="auditorname" name="auditorname" placeholder="الاسم" class="form-control" id="auditorname" required>
         </div>
          <br>
-         <br>
 
         <div class="form-group">
           <input type="text" [(ngModel)]="auditoraddress" name="auditoraddress" placeholder="العنوان" class="form-control" id="auditoraddress" required>
@@ -90,7 +117,7 @@
          
 
         <div style="text-align:center;">
-          <input type="submit" class="btn btn-success btn-raised center" style="position: absolute; bottom:10px; margin: 0 auto;" value="Submit" [disabled] = "!companyname || !companyaddress || !registernum || !partnername || !managername || !auditorname">
+          <input type="submit" class="btn btn-success center" style="position: absolute; bottom:10px; margin: 0 auto;" value="Submit" [disabled] = "!companyname || !companyaddress || !registernum || !partnername || !managername || !auditorname">
         </div>
 
       </div>

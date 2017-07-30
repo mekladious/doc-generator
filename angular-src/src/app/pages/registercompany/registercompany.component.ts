@@ -19,7 +19,7 @@ export class RegisterCompanyComponent {
   partneraddress: string;
   auditorname: string;
   auditoraddress: string;
-
+  partners: Array<Object> = [];
 
   constructor(
     private http: Http,
@@ -27,7 +27,22 @@ export class RegisterCompanyComponent {
     private companiesService: CompaniesService,
     private flashMessage: FlashMessagesService
   ) {
+    this.partners = [];
     }
+
+  addPartner(name, address){
+    let newPartner = {"name":name, "address": address};
+    this.partners.push(newPartner);
+    this.partneraddress="";
+    this.partnername="";
+    
+    console.log(this.partners);
+  }
+
+  removePartner(partner){
+    let index = this.partners.indexOf(partner);
+    this.partners.splice(index,1);
+  }
 
   onSubmit() {
     const newCompany = {
@@ -35,11 +50,6 @@ export class RegisterCompanyComponent {
         address: this.companyaddress,
         register: this.registernum
       };
-
-    const newPartner = {
-      name: this.partnername,
-      address: this.partneraddress
-    };
 
     const newAuditor = {
       name: this.auditorname, 
@@ -51,9 +61,11 @@ export class RegisterCompanyComponent {
       address: this.manageraddress
     };
 
+    const partners = this.partners
+
     const body = {
       newCompany,
-      newPartner,
+      partners,
       newAuditor,
       newManager
     };
@@ -63,11 +75,11 @@ export class RegisterCompanyComponent {
       if(res.error){
         window.scrollTo(0,0);
         this.flashMessage.show(res.error.msg,
-         { cssClass: 'alert-danger', timeout: 4000});
+          { cssClass: 'alert-danger', timeout: 4000});
       }else{
         window.scrollTo(0,0);
         this.flashMessage.show(res.msg,
-         { cssClass: 'alert-success', timeout: 4000});
+          { cssClass: 'alert-success', timeout: 4000});
       }
     });
   }
