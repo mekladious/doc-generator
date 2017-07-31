@@ -94,6 +94,7 @@ module.exports.convert = [
         }
         // console.log(req.body);
         var file = req.body;
+        var agenda = file.agenda;
         var auditor = file.auditor;
         auditor.type = "مراقب حساباتl";
         //var partners = file.partners;
@@ -144,7 +145,8 @@ module.exports.convert = [
             register: file.company.register,
             meetingtype: meetingtype,
             agenda:"jjmk",
-            companytype: companytype
+            companytype: companytype,
+            agenda: agenda
         });
         // console.log('here')
         try {
