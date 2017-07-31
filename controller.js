@@ -3,6 +3,7 @@ var Company = mongoose.model('Company');
 var Partner = mongoose.model('Partner');
 var Auditor = mongoose.model('Auditor');
 var Manager = mongoose.model('Manager');
+var Draft = mongoose.model('Draft');
 
 var mkdirp = require('mkdirp');
 
@@ -106,7 +107,7 @@ module.exports.convert = [
 
         var companytype = (req.body.company.type=="limited")? "ذات مسئولية محدودة":"شركة مساهمة مصرية";
         var partnertype = (req.body.company.type=="limited")? "مالك حصص":"مالك أسهم";
-        var managertype = (req.body.company.type=="limited")? "مدير":"رئيس مجلس الإدارة / عضو مجلسس الإدارة";
+        var managertype = (req.body.company.type=="limited")? "مدير":"رئيس مجلس الإدارة";
         //Load the docx file as a binary
         var content = fs
             .readFileSync(path.resolve(__dirname, 'files/template.docx'), 'binary');
@@ -141,7 +142,9 @@ module.exports.convert = [
             meetingtype: meetingtype,
             agenda:"jjmk",
             companytype: companytype,
-            agenda: agenda
+            agenda: agenda,
+            managertype: managertype,
+            partnertype: partnertype
         });
         // console.log('here')
         try {
@@ -247,9 +250,11 @@ module.exports.getPartners = function(req, res){
 module.exports.addNewCompany = [
     function(req, res, next){
 
-        console.log(req.body.body.partners);
+        console.log(req.body.data);
         console.log(req.body);
-        req.body= req.body.body;
+        req.body= req.body.data;
+
+        console.log(req.body.newCompany);
         Company.findOne({name: req.body.newCompany.name}, function(err, company) {
             if (err) {
                 return res.json({
@@ -274,8 +279,6 @@ module.exports.addNewCompany = [
     function(req, res, next){
         Company.create(req.body.newCompany, function(err, company) {
             if (err) {
-
-        console.log(req.body.body.newCompany.partners);
                 return res.json({
                     error: {
                         msg: err.message
@@ -330,9 +333,11 @@ module.exports.addNewCompany = [
                     }
                 });
             }
-            return res.json({
-                msg: 'Company has been added successfully'
-            });
+            else{
+                return res.json({
+                    msg: 'Company has been added successfully'
+                });
+            }
         })
     }
 ];
@@ -399,4 +404,20 @@ module.exports.addManager = function(req, res){
 
 module.exports.test = (req, res) => {
     res.download(__dirname, '/files/template.docx');
+}
+
+module.exports.saveDraft = (req, res) => {
+    console.log(req.body);
+    Draft.create(req.body.newDraft, function(err){
+        if (err) {
+            return res.json({
+                error: {
+                    msg: err.message
+                }
+            });
+        }
+        return res.json({
+            msg: 'Draft has been saved successfully'
+        });
+    });
 }
