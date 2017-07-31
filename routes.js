@@ -43,6 +43,8 @@ router.post('/upload', function(req, res) {
   });
 });
 
+router.post('/save', controller.saveDraft);
+
 router.post('/api/xlsx',function(req,res){
     upload(req,res,function(err) {
         if(err) {
