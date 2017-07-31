@@ -78,14 +78,15 @@ export class Converter {
       month: this.month + 1,
       year: this.year,
       dayName: this.dayName,
-      meetingtype: this.type
+      meetingtype: this.type,
+      agenda: this.agenda
     };
     // console.log(file);
     this.convertService.convert(file).subscribe(res => {
+      this.flashMessage.show('Document is being generated, your download will start soon',
+         { cssClass: 'alert-success', timeout: 4000});
       console.log(res);
       if (res.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
-        this.flashMessage.show('Document is being generated, your download will start soon',
-         { cssClass: 'alert-success', timeout: 4000});
         importedSaveAs(res, this.company + '.docx');
       }else {
         this.flashMessage.show('error generating document', { cssClass: 'alert-danger', timeout: 3000});
