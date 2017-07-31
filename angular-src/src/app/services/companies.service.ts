@@ -17,7 +17,14 @@ export class CompaniesService {
     const headers = new Headers();
     headers.append('Content-Type','application/json');
 
-    return this.http.post('user/addCompany', {body:body},{headers: headers})
+    return this.http.post('user/addCompany', {data:body},{headers: headers})
+      .map(res => res.json())
+  }
+  saveDraft(body) {
+    const headers = new Headers();
+    headers.append('Content-Type','application/json');
+
+    return this.http.post('user/save', {newDraft:body},{headers: headers})
       .map(res => res.json())
   }
 
