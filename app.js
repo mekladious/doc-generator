@@ -22,6 +22,7 @@ require('./models/company')
 require('./models/partner')
 require('./models/auditor')
 require('./models/manager')
+require('./models/draft')
 
 mongoose.connect(config.database);
 
