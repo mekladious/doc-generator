@@ -18,6 +18,7 @@ import 'rxjs/Rx' ;
 })
 export class Converter {
   company: string;
+  companyname: string;
   // input3: String;
   input4: string;
   date: Date;
@@ -85,9 +86,8 @@ export class Converter {
     this.convertService.convert(file).subscribe(res => {
       this.flashMessage.show('Document is being generated, your download will start soon',
          { cssClass: 'alert-success', timeout: 4000});
-      console.log(res);
       if (res.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
-        importedSaveAs(res, this.company + '.docx');
+        importedSaveAs(res, this.company+'-'+this.type+'-'+this.day +'/'+ this.month+1 +'/'+ this.year + '.docx');
       }else {
         this.flashMessage.show('error generating document', { cssClass: 'alert-danger', timeout: 3000});
         // this.flashMessage.show('error generating document', { cssClass: 'alert-danger', timeout: 3000});
