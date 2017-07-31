@@ -30,6 +30,8 @@ export class Converter {
   download: boolean;
   dir: String;
   type: String;
+  agenda: Array<Object> = [];
+  item: String;
 
   constructor (
     private http: Http,
@@ -48,6 +50,18 @@ export class Converter {
       });
   }
   
+  addItem(item){
+    let newEntry = {"item": item};
+    this.agenda.push(newEntry);
+    this.item="";
+    console.log(this.agenda);
+  }
+  
+  removeItem(item){
+    let index = this.agenda.indexOf(item);
+    this.agenda.splice(index,1);
+  }
+
   onGenerate() {
     this.generate= false;
     this.date = new Date(this.input4);
