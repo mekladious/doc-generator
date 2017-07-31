@@ -61,13 +61,12 @@
             <h5>بيانات الشركاء</h5>
         <!-- <button type="button" (click)="partners.push({})">+</button> -->
         </div> 
-        <br>
 
 
         <table>
-          <tr *ngFor="let partner of partners" style="margin-bottom: 10px;">
-              <td>{{partner.name}}،</td> <td>{{partner.address}}</td> <td><button (click)="removePartner(partner)" class="btn btn-danger btn-xs">x</button></td>
-          </tr>
+            <tr *ngFor="let partner of partners; let i = index" style="margin-bottom: 10px;">
+              <td>{{i+1}}.</td> &nbsp; <td>{{partner.name}}، </td> &nbsp; <td>{{partner.address}} </td> &nbsp; <td><button type="button" (click)="removePartner(partner)" class="btn btn-danger btn-xs">x</button></td>
+            </tr>
         </table>
         <br>
         <div class="form-group">
@@ -114,10 +113,10 @@
         <div class="form-group">
           <input type="text" [(ngModel)]="auditoraddress" name="auditoraddress" placeholder="العنوان" class="form-control" id="auditoraddress" required>
         </div>
-         
+         <br>
 
         <div style="text-align:center;">
-          <input type="submit" class="btn btn-success center" style="position: absolute; bottom:10px; margin: 0 auto;" value="Submit" [disabled] = "!companyname || !companyaddress || !registernum || !partnername || !managername || !auditorname">
+          <input type="submit" class="btn btn-success center" style="position: absolute; margin: 0 auto;" value="Submit" [disabled] = "!companyname || !companyaddress || !registernum || partners.length==0 || !managername || !auditorname">
         </div>
 
       </div>
