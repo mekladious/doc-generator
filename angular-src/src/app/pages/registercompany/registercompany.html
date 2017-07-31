@@ -36,7 +36,7 @@
           <label for="sel2" >نوع الشركة</label>
           <select class="form-control" [(ngModel)]="type" name="type">
             <option value=limited required>ذات مسئولية محدودة</option>
-            <option value=abnormal required>شركة مساهمة مصرية</option>
+            <option value=shareholding required>شركة مساهمة مصرية</option>
           </select>
         </div>
         <hr>
@@ -116,7 +116,8 @@
          <br>
 
         <div style="text-align:center;">
-          <input type="submit" class="btn btn-success center" style="position: absolute; margin: 0 auto;" value="Submit" [disabled] = "!companyname || !companyaddress || !registernum || partners.length==0 || !managername || !auditorname">
+          <button type="button" class="btn btn-primary" (click)="saveDraft()">Save Draft</button>
+          <input type="submit" class="btn btn-success" value="Submit" [disabled] = "!companyname || !companyaddress || !registernum || partners.length==0 || !managername || !auditorname">
         </div>
 
       </div>

@@ -19,6 +19,7 @@ export class RegisterCompanyComponent {
   partneraddress: string;
   auditorname: string;
   auditoraddress: string;
+  type: string;
   partners: Array<Object> = [];
 
   constructor(
@@ -44,11 +45,52 @@ export class RegisterCompanyComponent {
     this.partners.splice(index,1);
   }
 
+  saveDraft(){
+    const company = {
+        name: this.companyname,
+        address: this.companyaddress,
+        register: this.registernum,
+        type: this.type
+      };
+
+    const auditor = {
+      name: this.auditorname, 
+      address: this.auditoraddress
+    };
+
+    const manager = {
+      name: this.managername,
+      address: this.manageraddress
+    };
+
+    const partners = this.partners
+
+    const data = {
+      company,
+      partners,
+      auditor,
+      manager
+    };
+
+    this.companiesService.saveDraft(data).subscribe(res => {
+       if(res.error){
+        window.scrollTo(0,0);
+        this.flashMessage.show(res.error.msg,
+          { cssClass: 'alert-danger', timeout: 4000});
+      }else{
+        window.scrollTo(0,0);
+        this.flashMessage.show(res.msg,
+          { cssClass: 'alert-success', timeout: 4000});
+      }
+    });
+  }
+
   onSubmit() {
     const newCompany = {
         name: this.companyname,
         address: this.companyaddress,
-        register: this.registernum
+        register: this.registernum,
+        type: this.type
       };
 
     const newAuditor = {
@@ -63,14 +105,14 @@ export class RegisterCompanyComponent {
 
     const partners = this.partners
 
-    const body = {
+    const data = {
       newCompany,
       partners,
       newAuditor,
       newManager
     };
 
-    this.companiesService.addCompany(body).subscribe(res => {
+    this.companiesService.addCompany(data).subscribe(res => {
       console.log(res)
       if(res.error){
         window.scrollTo(0,0);
