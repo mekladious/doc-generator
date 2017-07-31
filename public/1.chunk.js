@@ -248,30 +248,78 @@ var RegisterCompanyComponent = (function () {
         this.router = router;
         this.companiesService = companiesService;
         this.flashMessage = flashMessage;
+        this.partners = [];
+        this.partners = [];
     }
+    RegisterCompanyComponent.prototype.addPartner = function (name, address) {
+        var newPartner = { "name": name, "address": address };
+        this.partners.push(newPartner);
+        this.partneraddress = "";
+        this.partnername = "";
+        console.log(this.partners);
+    };
+    RegisterCompanyComponent.prototype.removePartner = function (partner) {
+        var index = this.partners.indexOf(partner);
+        this.partners.splice(index, 1);
+    };
+    RegisterCompanyComponent.prototype.saveDraft = function () {
+        var _this = this;
+        var company = {
+            name: this.companyname,
+            address: this.companyaddress,
+            register: this.registernum,
+            type: this.type
+        };
+        var auditor = {
+            name: this.auditorname,
+            address: this.auditoraddress
+        };
+        var manager = {
+            name: this.managername,
+            address: this.manageraddress
+        };
+        var partners = this.partners;
+        var data = {
+            company: company,
+            partners: partners,
+            auditor: auditor,
+            manager: manager
+        };
+        this.companiesService.saveDraft(data).subscribe(function (res) {
+            if (res.error) {
+                window.scrollTo(0, 0);
+                _this.flashMessage.show(res.error.msg, { cssClass: 'alert-danger', timeout: 4000 });
+            }
+            else {
+                window.scrollTo(0, 0);
+                _this.flashMessage.show(res.msg, { cssClass: 'alert-success', timeout: 4000 });
+            }
+        });
+    };
     RegisterCompanyComponent.prototype.onSubmit = function () {
         var _this = this;
         var newCompany = {
             name: this.companyname,
             address: this.companyaddress,
-            register: this.registernum
-        };
-        var newPartner = {
-            name: this.partnername
+            register: this.registernum,
+            type: this.type
         };
         var newAuditor = {
-            name: this.auditorname
+            name: this.auditorname,
+            address: this.auditoraddress
         };
         var newManager = {
-            name: this.managername
+            name: this.managername,
+            address: this.manageraddress
         };
-        var body = {
+        var partners = this.partners;
+        var data = {
             newCompany: newCompany,
-            newPartner: newPartner,
+            partners: partners,
             newAuditor: newAuditor,
             newManager: newManager
         };
-        this.companiesService.addCompany(body).subscribe(function (res) {
+        this.companiesService.addCompany(data).subscribe(function (res) {
             console.log(res);
             if (res.error) {
                 window.scrollTo(0, 0);
@@ -321,7 +369,7 @@ var routing = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* RouterModule 
 /***/ 664:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"widgets\">\n\n        <flash-messages></flash-messages>\n\n<script src=\"https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js\"></script>\n  \n  <div class=\"typography-document-samples\"style=\"display: block;\">\n    <div class=\" typography-widget\">\n      <!-- <form *ngIf=\"generate\" (submit)=\"onGenerate() \"> -->\n      <form (submit)=\"onSubmit() \" >\n      <div title=\"Register new company\" baCardClass=\"with-scroll heading-widget\">\n        \n        <div>\n            <h5>Company details</h5>\n        </div> \n        <br>\n\n        <div class=\"form-group\">\n          <input type=\"text\" [(ngModel)]=\"companyname\" name=\"companyname\" placeholder=\"Company Name\" class=\"form-control\" id=\"companyname\" required>\n        </div>\n         <br>\n\n         <div class=\"form-group\">\n          <input type=\"text\" [(ngModel)]=\"companyaddress\" name=\"companyaddress\" placeholder=\"Company Address\" class=\"form-control\" id=\"companyaddress\" required>\n        </div>\n        <br>\n\n        <div class=\"form-group\">\n          <input type=\"number\" [(ngModel)]=\"registernum\" name=\"registernum\" placeholder=\"Company Register No.\" class=\"form-control\" id=\"registernum\" required>\n        </div>\n        \n        <hr>\n\n        <div>\n            <h5>Manager details</h5>\n        </div> \n        <br>\n\n        <div class=\"form-group\">\n          <input type=\"text\" [(ngModel)]=\"managername\" name=\"managername\" placeholder=\"Manager Name\" class=\"form-control\" id=\"managername\" required>\n        </div>\n\n        <hr>\n\n        <div>\n            <h5>Partner details</h5>\n        </div> \n        <br>\n\n        <div class=\"form-group\">\n          <input type=\"text\" [(ngModel)]=\"partnername\" name=\"partnername\" placeholder=\"Partner Name\" class=\"form-control\" id=\"partnername\" required>\n        </div>\n\n        <hr>\n\n        <div>\n            <h5>Auditor details</h5>\n        </div> \n        <br>\n\n        <div class=\"form-group\">\n          <input type=\"text\" [(ngModel)]=\"auditorname\" name=\"auditorname\" placeholder=\"Auditor Name\" class=\"form-control\" id=\"auditorname\" required>\n        </div>\n         <br>\n         \n\n        <div style=\"text-align:center;\">\n          <input type=\"submit\" class=\"btn btn-success btn-raised center\" style=\"position: absolute; bottom:10px; margin: 0 auto;\" value=\"Submit\" [disabled] = \"!companyname || !companyaddress || !registernum || !partnername || !managername || !auditorname\">\n        </div>\n\n      </div>\n      </form>\n      \n    </div>\n  </div>\n\n</div>\n"
+module.exports = "\n<html dir=\"rtl\" lang=\"ar\">\n<div class=\"widgets\">\n\n        <flash-messages></flash-messages>\n\n<script src=\"https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js\"></script>\n  \n  <div class=\"typography-document-samples\"style=\"display: block;\">\n    <div class=\" typography-widget\">\n      <!-- <form *ngIf=\"generate\" (submit)=\"onGenerate() \"> -->\n      <form (submit)=\"onSubmit() \" >\n      <div title=\"Register new company\" baCardClass=\"with-scroll heading-widget\">\n        \n        <div>\n            <h5>بيانات الشركة</h5>\n        </div> \n        <br>\n\n        <div class=\"form-group\">\n          <input type=\"text\" [(ngModel)]=\"companyname\" name=\"companyname\" placeholder=\"الاسم\" class=\"form-control\" id=\"companyname\" required>\n        </div>\n         <br>\n\n         <div class=\"form-group\">\n          <input type=\"text\" [(ngModel)]=\"companyaddress\" name=\"companyaddress\" placeholder=\"العنوان\" class=\"form-control\" id=\"companyaddress\" required>\n        </div>\n        <br>\n\n        <div class=\"form-group\">\n          <input type=\"number\" [(ngModel)]=\"registernum\" name=\"registernum\" placeholder=\"رقم السجل\" class=\"form-control\" id=\"registernum\" required>\n        </div>\n        <br>\n\n        <div class=\"form-group\">\n          <label for=\"sel2\" >نوع الشركة</label>\n          <select class=\"form-control\" [(ngModel)]=\"type\" name=\"type\">\n            <option value=limited required>ذات مسئولية محدودة</option>\n            <option value=shareholding required>شركة مساهمة مصرية</option>\n          </select>\n        </div>\n        <hr>\n\n        <div>\n            <h5> بيانات المدير</h5>\n        </div> \n        <br>\n\n        <div class=\"form-group\">\n          <input type=\"text\" [(ngModel)]=\"managername\" name=\"managername\" placeholder=\"الاسم\" class=\"form-control\" id=\"managername\" required>\n        </div>\n        <br>\n\n        <div class=\"form-group\">\n          <input type=\"text\" [(ngModel)]=\"manageraddress\" name=\"manageraddress\" placeholder=\"العنوان\" class=\"form-control\" id=\"managername\" required>\n        </div>\n\n        <hr>\n\n        <div>\n            <h5>بيانات الشركاء</h5>\n        <!-- <button type=\"button\" (click)=\"partners.push({})\">+</button> -->\n        </div> \n\n\n        <table>\n            <tr *ngFor=\"let partner of partners; let i = index\" style=\"margin-bottom: 10px;\">\n              <td>{{i+1}}.</td> &nbsp; <td>{{partner.name}}، </td> &nbsp; <td>{{partner.address}} </td> &nbsp; <td><button type=\"button\" (click)=\"removePartner(partner)\" class=\"btn btn-danger btn-xs\">x</button></td>\n            </tr>\n        </table>\n        <br>\n        <div class=\"form-group\">\n        <input #name type=\"text\" [(ngModel)]=\"partnername\" name=\"partnername\" placeholder=\"الاسم\" class=\"form-control\" required/>\n        </div>\n        <br>\n        <div class=\"form-group\">\n        <input #address type=\"text\" [(ngModel)]=\"partneraddress\" name=\"partneraddress\" placeholder=\"العنوان\" class=\"form-control\" required/>\n        </div>\n        <br>\n        <button type=\"button\" class=\"btn btn-primary btn-xs\" (click)=\"addPartner(name.value,address.value)\" [disabled]=\"!partnername || !partneraddress\">إضافة شريك</button>\n        <br>\n        <hr>  \n\n\n        <!-- <div *ngFor=\"let partner of partners; let i=index\">\n\n            <h5>الشريك رقم  {{i+1}}</h5>\n\n        <button type=\"button\" (click)=\"partners.splice(i, 1)\" >x</button>\n          <div class=\"form-group\">\n            <input type=\"text\" [(ngModel)]=\"partner.name\" name=\"partnername\" placeholder=\"الاسم\" class=\"form-control\" required>\n          </div>\n          <br>\n\n          <div class=\"form-group\">\n            <input type=\"text\" [(ngModel)]=\"partner.address\" name=\"partneraddress\" placeholder=\"العنوان\" class=\"form-control\" required>\n          </div>\n\n          <hr>\n        </div> -->\n        <br>\n\n        <div>\n            <h5>بيانات المحاسب</h5>\n        </div> \n        <br>\n\n        <div class=\"form-group\">\n          <input type=\"text\" [(ngModel)]=\"auditorname\" name=\"auditorname\" placeholder=\"الاسم\" class=\"form-control\" id=\"auditorname\" required>\n        </div>\n         <br>\n\n        <div class=\"form-group\">\n          <input type=\"text\" [(ngModel)]=\"auditoraddress\" name=\"auditoraddress\" placeholder=\"العنوان\" class=\"form-control\" id=\"auditoraddress\" required>\n        </div>\n         <br>\n\n        <div style=\"text-align:center;\">\n          <button type=\"button\" class=\"btn btn-primary\" (click)=\"saveDraft()\">Save Draft</button>\n          <input type=\"submit\" class=\"btn btn-success\" value=\"Submit\" [disabled] = \"!companyname || !companyaddress || !registernum || partners.length==0 || !managername || !auditorname\">\n        </div>\n\n      </div>\n      </form>\n      \n    </div>\n  </div>\n\n</div>\n</html>\n"
 
 /***/ })
 

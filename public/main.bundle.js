@@ -555,7 +555,13 @@ var CompaniesService = (function () {
     CompaniesService.prototype.addCompany = function (body) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]();
         headers.append('Content-Type', 'application/json');
-        return this.http.post('user/addCompany', { body: body }, { headers: headers })
+        return this.http.post('user/addCompany', { data: body }, { headers: headers })
+            .map(function (res) { return res.json(); });
+    };
+    CompaniesService.prototype.saveDraft = function (body) {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]();
+        headers.append('Content-Type', 'application/json');
+        return this.http.post('user/save', { newDraft: body }, { headers: headers })
             .map(function (res) { return res.json(); });
     };
     return CompaniesService;

@@ -1330,12 +1330,23 @@ var Converter = (function () {
         this.router = router;
         this.convertService = convertService;
         this.companiesService = companiesService;
+        this.agenda = [];
         this.generate = true;
         this.dir = '/Users/mekladious/ng2-admin/backend/template.docx';
         this.companiesService.getCompanies().subscribe(function (data) {
             _this.companies = data.companies;
         });
     }
+    Converter.prototype.addItem = function (item) {
+        var newEntry = { "item": item };
+        this.agenda.push(newEntry);
+        this.item = "";
+        console.log(this.agenda);
+    };
+    Converter.prototype.removeItem = function (item) {
+        var index = this.agenda.indexOf(item);
+        this.agenda.splice(index, 1);
+    };
     Converter.prototype.onGenerate = function () {
         var _this = this;
         this.generate = false;
@@ -1352,13 +1363,14 @@ var Converter = (function () {
             month: this.month + 1,
             year: this.year,
             dayName: this.dayName,
+            meetingtype: this.type,
+            agenda: this.agenda
         };
         // console.log(file);
         this.convertService.convert(file).subscribe(function (res) {
-            console.log(res);
+            _this.flashMessage.show('Document is being generated, your download will start soon', { cssClass: 'alert-success', timeout: 4000 });
             if (res.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
-                _this.flashMessage.show('Document is being generated, your download will start soon', { cssClass: 'alert-success', timeout: 4000 });
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5_file_saver__["saveAs"])(res, _this.company + '.docx');
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5_file_saver__["saveAs"])(res, _this.company + '-' + _this.type + '-' + _this.day + '/' + _this.month + '/' + _this.year + '.docx');
             }
             else {
                 _this.flashMessage.show('error generating document', { cssClass: 'alert-danger', timeout: 3000 });
@@ -3270,7 +3282,7 @@ if (typeof module !== "undefined" && module.exports) {
 /* 663 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"widgets\">\n  <flash-messages></flash-messages>\n<script src=\"https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js\"></script>\n  <div class=\"typography-document-samples\"style=\"display: block;\">\n    <div class=\" typography-widget\">\n      <form (submit)=\"onGenerate() \">\n      <!--<form (submit)=\"onGenerate() \" >-->\n      <div title=\"DOCUMENT GENERATOR\" baCardClass=\"with-scroll heading-widget\">\n        \n          <div>\n            <h3>Choose data you want to display in the word file</h3>\n          </div>\n        <br>\n\n        <div class=\"form-group\">\n          <label for=\"sel1\">Company:</label>\n          <select class=\"form-control\" [(ngModel)]=\"company\" name=\"company\">\n            <option *ngFor=\"let company of companies\" value={{company._id}} required>{{company.name}}</option>\n          </select>\n        </div>\n         <br>\n\n        <div class=\"form-group\">\n          <label for=\"cal\">Date:</label> <br>\n          <input type=\"date\" [(ngModel)]=\"input4\" name=\"input4\" placeholder=\"Enter text\" class=\"form-control\" id=\"cal\" required>\n        </div>\n         <br>\n        <div>\n\n        </div>\n        <div style=\"text-align:center;\">\n          <input type=\"submit\" class=\"btn btn-success btn-raised center\" style=\"position: absolute; bottom:10px; margin: 0 auto;\" value=\"Generate file\" [disabled]=\"!input4 || !company || !generate\">\n        </div>\n      </div>\n      </form>\n      \n    </div>\n  </div>\n\n</div>\n"
+module.exports = "\n<html dir=\"rtl\" lang=\"ar\">\n  <div class=\"widgets\">\n  <flash-messages></flash-messages>\n<script src=\"https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js\"></script>\n  <div class=\"typography-document-samples\"style=\"display: block;\">\n    <div class=\" typography-widget\">\n      <form (submit)=\"onGenerate() \">\n      <!--<form (submit)=\"onGenerate() \" >-->\n      <div title=\"DOCUMENT GENERATOR\" baCardClass=\"with-scroll heading-widget\">\n        \n          <div>\n            <h3>محضر الجمعية + دعوات +استقالة +إقرار صحة</h3>\n          </div>\n        <br>\n\n        <div class=\"form-group\">\n          <label for=\"sel1\">الشركة:</label>\n          <select class=\"form-control\" [(ngModel)]=\"company\" name=\"company\">\n            <option *ngFor=\"let company of companies\" value={{company._id}} required>{{company.name}}</option>\n          </select>\n        </div>\n         <br>\n\n         <div class=\"form-group\">\n          <label for=\"sel2\" >نوع الجمعية:</label>\n          <select class=\"form-control\" [(ngModel)]=\"type\" name=\"type\">\n            <option value=\"عادية\" required>عادية</option>\n            <option value=\"غير عادية\" required>غير عادية</option>\n          </select>\n        </div>\n         <br>\n\n        <div class=\"form-group\">\n          <label for=\"cal\">تاريخ الجمعية:</label> <br>\n          <input type=\"date\" [(ngModel)]=\"input4\" name=\"input4\" placeholder=\"Enter text\" class=\"form-control\" id=\"cal\" required>\n        </div>\n         <br>\n         <hr>\n\n         <div>\n            <h5>الأجندة</h5>\n        </div> \n         <table>\n            <tr *ngFor=\"let entry of agenda; let i = index\" style=\"margin-bottom: 10px;\">\n              <td>{{i+1}}.</td> &nbsp; <td>{{entry.item}} </td>  &nbsp; <td><button type=\"button\" (click)=\"removeItem(entry)\" class=\"btn btn-danger btn-xs\">x</button></td>\n            </tr>\n        </table>\n        <br>\n        <div class=\"form-group\">\n         <input type=\"text\" [(ngModel)]=\"item\" name=\"item\" placeholder=\"قرار\" class=\"form-control\" required/> \n        </div>\n        <br>\n        <button type=\"button\" class=\"btn btn-primary btn-xs\" (click)=\"addItem(item)\" [disabled]=\"!item\">إضافة</button>\n        <br>\n\n        <div style=\"text-align:center;\">\n          <input type=\"submit\" class=\"btn btn-success btn-raised center\" style=\"position: absolute; margin: 0 auto;\" value=\"Generate file\" [disabled]=\"!input4 || !company || !generate\">\n        </div>\n      </div>\n      </form>\n      \n    </div>\n  </div>\n\n</div>\n</html>\n"
 
 /***/ }),
 /* 664 */,
