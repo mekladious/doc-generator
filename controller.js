@@ -97,17 +97,12 @@ module.exports.convert = [
         var agenda = file.agenda;
         var auditor = file.auditor;
         auditor.type = "مراقب حساباتl";
-        //var partners = file.partners;
+        var partners = file.partners;
         var manager = file.manager;
         manager.type = "مدير";
         var date = req.body.day+"/"+req.body.month+"/"+req.body.year;
         var day = req.body.dayName;
         var meetingtype = file.meetingtype;
-
-        var partners = [
-            {name:"mira", address:"123"},
-            {name:"medhat", address:"123"}
-        ];
 
         var companytype = (req.body.company.type=="limited")? "ذات مسئولية محدودة":"شركة مساهمة مصرية";
         var partnertype = (req.body.company.type=="limited")? "مالك حصص":"مالك أسهم";
